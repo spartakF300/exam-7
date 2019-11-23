@@ -9,14 +9,13 @@ class App extends Component {
         total: 0
     };
 
-    addOrder = (name) => {
+    addOrder = (name, cost) => {
         const order = this.state.order;
         const index = order.findIndex((item) => item.name === name);
         index === -1 ? order.push({name: name, count: 1}) : order[index].count++;
-        const indexMenu = menu.findIndex(item => item.name === name);
         let total = this.state.total;
-        total+= menu[indexMenu].cost;
-        this.setState({order,total})
+        total+= cost;
+        this.setState({order,total});
     };
 
     removeOrder = (index, name) => {
@@ -54,7 +53,7 @@ class App extends Component {
                                 cost={item.cost}
                                 name={item.name}
                                 type={item.type}
-                                addOrder={() => this.addOrder(item.name)}
+                                addOrder={() => this.addOrder(item.name,item.cost)}
                             />
                         )}
                     </div>
